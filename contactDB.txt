@@ -1,0 +1,31 @@
+/////	Display all the contact list	/////
+
+db.contactlist.find().pretty()
+
+/////	Display all the information about only one person by using his ID	/////
+
+db.contactlist.find({ _id: ObjectId("xxxxx") })
+
+/////	Display all the contact list having age > 18	//////
+
+db.contactlist.find({ age: { $gt: 18 } })
+
+/////	Display all the contact list having age>18 and name containing "ah"	//////
+
+db.contactlist.find({
+  $and: [
+		{age: {$gt: 18}},
+		{last_name: {$regex: /ah/}}
+	]
+})
+
+
+////	Change the contact first name of "Kefi Seif" by "Kefi Anis"	/////
+
+db.contactlist.update({first_name:"Seif"}, {$set: {first_name: "Anis"}})
+
+
+////	Delete the contact list having age < 5	/////
+
+
+db.contactlist.deleteMany({age: {$lt: 5}})
